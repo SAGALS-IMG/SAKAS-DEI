@@ -130,21 +130,21 @@
             <Form>Form_Main</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="SelShape.pas"/>
         <DCCReference Include="Unit_ABOUT.pas">
             <Form>AboutBox</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="Unit_LP.pas">
+        <DCCReference Include="..\SAKAS-COM\SelShape.pas"/>
+        <DCCReference Include="..\SAKAS-COM\UFFT.pas"/>
+        <DCCReference Include="..\SAKAS-COM\Unit_LP.pas">
             <Form>Form_LP</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="Unit_PW.pas">
-            <Form>PW</Form>
+        <DCCReference Include="..\SAKAS-COM\Unit_PW.pas">
+            <Form>Form_PW</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="FFTUnit.pas"/>
-        <DCCReference Include="Unit_SAKAS.pas">
+        <DCCReference Include="..\SAKAS-COM\Unit_SAKAS.pas">
             <Form>Form_SAKAS</Form>
             <FormType>dfm</FormType>
         </DCCReference>
@@ -182,24 +182,39 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="Win64\Release\SAKAS_DEI.exe" Configuration="Release" Class="ProjectOutput">
+                    <Platform Name="Win64">
+                        <RemoteName>SAKAS_DEI.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="Win64\Debug\SAKAS_DEI.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win64">
                         <RemoteName>SAKAS_DEI.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Win64\Debug\SAKAS_DEI.rsm" Configuration="Debug" Class="DebugSymbols">
-                    <Platform Name="Win64">
-                        <RemoteName>SAKAS_DEI.rsm</RemoteName>
-                        <Overwrite>true</Overwrite>
+                <DeployClass Name="DependencyModule">
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                        <Extensions>.dll;.bpl</Extensions>
                     </Platform>
-                </DeployFile>
-                <DeployClass Name="ProjectiOSDeviceResourceRules">
                     <Platform Name="iOSDevice64">
                         <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
                     </Platform>
                     <Platform Name="iOSDevice32">
                         <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
                     </Platform>
                 </DeployClass>
                 <DeployClass Name="ProjectOSXResource">
@@ -578,27 +593,12 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <DeployClass Name="DependencyModule">
-                    <Platform Name="Win32">
-                        <Operation>0</Operation>
-                        <Extensions>.dll;.bpl</Extensions>
-                    </Platform>
+                <DeployClass Name="ProjectiOSDeviceResourceRules">
                     <Platform Name="iOSDevice64">
                         <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
-                    </Platform>
-                    <Platform Name="OSX32">
-                        <RemoteDir>Contents\MacOS</RemoteDir>
-                        <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
                     </Platform>
                     <Platform Name="iOSDevice32">
                         <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
-                    </Platform>
-                    <Platform Name="iOSSimulator">
-                        <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
                     </Platform>
                 </DeployClass>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
