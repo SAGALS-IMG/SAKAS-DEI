@@ -121,6 +121,7 @@ type
     Edit_Dir: TEdit;
     SB_Dir: TSpeedButton;
     SB_TagList_Reload: TSpeedButton;
+    BB_STOP_Proc: TBitBtn;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
 
@@ -156,6 +157,9 @@ type
     procedure WriteProc2(Sender: TObject);
     procedure BB_Save_CondClick(Sender: TObject);
     procedure SB_HelpClick(Sender: TObject);
+    procedure SB_DirClick(Sender: TObject);
+    procedure SB_TagList_ReloadClick(Sender: TObject);
+    procedure BB_STOP_ProcClick(Sender: TObject);
 var
   private
     { Private êÈåæ }
@@ -199,6 +203,8 @@ begin
       WindowState := wsMaximized
     else
       WindowState := wsNormal;
+
+    Edit_Dir.Text := Ini.ReadString( 'Param', 'Tag_Dir', '' );
 
     Edit_OW.Text  := Ini.ReadString( 'Param', 'OW', '1000' );
     Edit_OH.Text  := Ini.ReadString( 'Param', 'OH', '500' );
@@ -251,6 +257,8 @@ begin
 
     Ini.WriteBool( 'Form_Main', 'InitMax', WindowState = wsMaximized );
 
+    Ini.WriteString( 'Param', 'Tag_Dir', Edit_Dir.Text );
+
     Ini.WriteString( 'Param', 'OW', Edit_OW.Text );
     Ini.WriteString( 'Param', 'OH', Edit_OH.Text );
     Ini.WriteString( 'Param', 'PW', Edit_PW.Text );
@@ -300,6 +308,15 @@ begin
     EDit_BKFN.Text := OpenDialog1.FileName;
 end;
 
+procedure TForm_Main.SB_DirClick(Sender: TObject);
+begin
+  if OpenDialog1.Execute then
+  begin
+    Edit_Dir.Text := ExtractFilePath(OpenDialog1.FileName);
+    SB_TagList_ReloadClick(Sender);
+  end;
+end;
+
 procedure TForm_Main.SB_FNClick(Sender: TObject);
 begin
   if OpenDialog1.Execute then
@@ -316,6 +333,25 @@ end;
 procedure TForm_Main.SB_HelpClick(Sender: TObject);
 begin
   AboutBox.ShowModal;
+end;
+
+procedure TForm_Main.SB_TagList_ReloadClick(Sender: TObject);
+var
+  Path: String;
+  FileList: TStringDynArray;
+  FileName: String;
+begin
+  if Edit_Dir.Text<>'' then
+  begin
+    CLB_File.Items.Clear;
+    Path := ExtractFilePath(Edit_Dir.Text);
+
+    FileList := TDirectory.GetFiles(Path, CB_Ext.Items[CB_Ext.ItemIndex] , TSearchOption.soTopDirectoryOnly);
+    for FileName in FileList do
+    begin
+      CLB_File.Items.Add(FileName);
+    end;
+  end;
 end;
 
 procedure TForm_Main.Init_Cond(Sender: TObject);
@@ -1102,6 +1138,15 @@ end;
 
 
 
+
+procedure TForm_Main.BB_STOP_ProcClick(Sender: TObject);
+var
+  li:longint;
+begin
+  for li:=0 to CLB_File.Items.Count-1 do
+    CLB_File.Checked[li] := false;
+  Go := false;
+end;
 
 procedure TForm_Main.BB_Get_ListClick(Sender: TObject);
 var

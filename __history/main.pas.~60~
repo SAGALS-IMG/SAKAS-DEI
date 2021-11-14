@@ -19,7 +19,6 @@ type
     Panel2: TPanel;
     SB_Help: TSpeedButton;
     SB_ViewInfo: TSpeedButton;
-    BB_Get_List: TBitBtn;
     BB_Proc: TBitBtn;
     CB_Ext: TComboBox;
     CB_AllCK: TCheckBox;
@@ -118,6 +117,10 @@ type
     Edit_CBW: TEdit;
     Label12: TLabel;
     Label22: TLabel;
+    Label37: TLabel;
+    Edit_Dir: TEdit;
+    SB_Dir: TSpeedButton;
+    SB_TagList_Reload: TSpeedButton;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
 
@@ -152,6 +155,7 @@ type
     procedure OpenTag(Sender: TObject);
     procedure WriteProc2(Sender: TObject);
     procedure BB_Save_CondClick(Sender: TObject);
+    procedure SB_HelpClick(Sender: TObject);
 var
   private
     { Private 宣言 }
@@ -179,7 +183,7 @@ implementation
 
 {$R *.dfm}
 
-uses Unit_SAKAS;
+uses Unit_SAKAS, Unit_ABOUT;
 
 procedure TForm_Main.FormCreate(Sender: TObject);
 var
@@ -309,14 +313,19 @@ end;
 
 
 
+procedure TForm_Main.SB_HelpClick(Sender: TObject);
+begin
+  AboutBox.ShowModal;
+end;
+
 procedure TForm_Main.Init_Cond(Sender: TObject);
 begin
-  PW.OW := StrToInt(Edit_OW.Text);
-  PW.OH := StrToInt(Edit_OH.Text);
-  PW.PW := StrToInt(Edit_PW.Text);
-  PW.PH := StrToInt(Edit_PH.Text);
-  PW.OFFX := StrToInt(Edit_OffX.Text);
-  PW.OFFY := StrToInt(Edit_OffY.Text);
+  Form_PW.OW := StrToInt(Edit_OW.Text);
+  Form_PW.OH := StrToInt(Edit_OH.Text);
+  Form_PW.PW := StrToInt(Edit_PW.Text);
+  Form_PW.PH := StrToInt(Edit_PH.Text);
+  Form_PW.OFFX := StrToInt(Edit_OffX.Text);
+  Form_PW.OFFY := StrToInt(Edit_OffY.Text);
 
   Pro := StrToInt(Edit_Pro.Text);
   BKInt := StrToInt(Edit_BKInt.Text);
@@ -338,11 +347,11 @@ procedure TForm_Main.BB_PreViewClick(Sender: TObject);
 begin
   Init_Cond(Sender);
 
-  PW.UD_TPro.Position := UD_PreV.Position;
-  PW.Load_WORDData(Edit_FN.Text,Sender);
+  Form_PW.UD_TPro.Position := UD_PreV.Position;
+  Form_PW.Load_WORDData(Edit_FN.Text,Sender);
 
-  PW.Show;
-  PW.Draw_Data(Sender);
+  Form_PW.Show;
+  Form_PW.Draw_Data(Sender);
 end;
 
 procedure TForm_Main.UD_PreVClick(Sender: TObject; Button: TUDBtnType);
@@ -356,14 +365,14 @@ var
   TmpStr : string;
 begin
   Init_Cond(Sender);
-  PW.Show;
+  Form_PW.Show;
 
   if CB_Dammy.Checked then
   begin
     for k:=0 to SN-1 do
     begin
-      for j:=0 to PW.PH-1 do
-        for i:=0 to PW.PW-1 do
+      for j:=0 to Form_PW.PH-1 do
+        for i:=0 to Form_PW.PW-1 do
         begin
           BKIData[0,k,j,i] := 1;
           BKIData[1,k,j,i] := 1;
@@ -375,8 +384,8 @@ begin
   begin
     for k:=0 to SN-1 do
     begin
-      for j:=0 to PW.PH-1 do
-        for i:=0 to PW.PW-1 do
+      for j:=0 to Form_PW.PH-1 do
+        for i:=0 to Form_PW.PW-1 do
         begin
           BKIData[0,k,j,i] := 0;
           BKIData[1,k,j,i] := 0;
@@ -390,27 +399,27 @@ begin
   begin
     for k:=0 to SN-1 do
     begin
-      PW.UD_TPro.Position :=k;
-      PW.Load_WORDData(Edit_BKFN.Text, Sender);
-      for j:=0 to PW.PH-1 do
-        for i:=0 to PW.PW-1 do
+      Form_PW.UD_TPro.Position :=k;
+      Form_PW.Load_WORDData(Edit_BKFN.Text, Sender);
+      for j:=0 to Form_PW.PH-1 do
+        for i:=0 to Form_PW.PW-1 do
         begin
-          BKIData[0,k,j,i] := PW.IData[j,i];
-          BKIData[1,k,j,i] := PW.IData[j,i];
+          BKIData[0,k,j,i] := Form_PW.IData[j,i];
+          BKIData[1,k,j,i] := Form_PW.IData[j,i];
         end;
     end;
     if Edit_BKFN2.Text<>'' then
     for k:=0 to SN-1 do
     begin
-      PW.UD_TPro.Position :=k;
-      PW.Load_WORDData(Edit_BKFN2.Text, Sender);
-      for j:=0 to PW.PH-1 do
-        for i:=0 to PW.PW-1 do
-          BKIData[1,k,j,i] := PW.IData[j,i];
+      Form_PW.UD_TPro.Position :=k;
+      Form_PW.Load_WORDData(Edit_BKFN2.Text, Sender);
+      for j:=0 to Form_PW.PH-1 do
+        for i:=0 to Form_PW.PW-1 do
+          BKIData[1,k,j,i] := Form_PW.IData[j,i];
     end;
     for k:=0 to SN-1 do
-      for j:=0 to PW.PH-1 do
-        for i:=0 to PW.PW-1 do
+      for j:=0 to Form_PW.PH-1 do
+        for i:=0 to Form_PW.PW-1 do
           BKIData[2,k,j,i] := BKIData[1,k,j,i];
   end
   else
@@ -423,27 +432,27 @@ begin
         for k:=0 to SN-1 do
         begin
           UD_PreV.Position :=kk*(BKInt+BKNum)*SN+k+OffsetPro+m*SN ;//*SN;{+37*kk}//sCMOS利用時
-          PW.UD_TPro.Position := UD_PreV.Position;
-          TmpStr := TmpStr+' '+PW.UD_TPro.Position.ToString;
+          Form_PW.UD_TPro.Position := UD_PreV.Position;
+          TmpStr := TmpStr+' '+Form_PW.UD_TPro.Position.ToString;
           Memo.Lines.Text := TmpStr;
 
-          PW.Load_WORDData(Edit_FN.Text, Sender);
+          Form_PW.Load_WORDData(Edit_FN.Text, Sender);
 //          PW.Gauss_Smooth_Img(PW.PData);
-          for j:=0 to PW.PH-1 do
-            for i:=0 to PW.PW-1 do
-              BKIData[kk,k,j,i] := BKIData[kk,k,j,i]+PW.IData[j,i];
+          for j:=0 to Form_PW.PH-1 do
+            for i:=0 to Form_PW.PW-1 do
+              BKIData[kk,k,j,i] := BKIData[kk,k,j,i]+Form_PW.IData[j,i];
         end;
       end;
       m:=StrToInt(Edit_BKN.Text);
       for k:=0 to SN-1 do
-        for j:=0 to PW.PH-1 do
-          for i:=0 to PW.PW-1 do
+        for j:=0 to Form_PW.PH-1 do
+          for i:=0 to Form_PW.PW-1 do
             BKIData[kk,k,j,i] := BKIData[kk,k,j,i] div m;
     end;
 
     for k:=0 to SN-1 do
-      for j:=0 to PW.PH-1 do
-        for i:=0 to PW.PW-1 do
+      for j:=0 to Form_PW.PH-1 do
+        for i:=0 to Form_PW.PW-1 do
         begin
           BKIData[(Pro div BKInt)+1,k,j,i] := BKIData[(Pro div BKInt),k,j,i];
           BKIData[(Pro div BKInt)+2,k,j,i] := BKIData[(Pro div BKInt),k,j,i];
@@ -452,8 +461,8 @@ begin
     if CB_1stBK.Checked then
     begin
       for k:=0 to SN-1 do
-        for j:=0 to PW.PH-1 do
-          for i:=0 to PW.PW-1 do
+        for j:=0 to Form_PW.PH-1 do
+          for i:=0 to Form_PW.PW-1 do
           begin
             BKIData[1,k,j,i] := BKIData[0,k,j,i];
             BKIData[2,k,j,i] := BKIData[0,k,j,i];
@@ -463,8 +472,8 @@ begin
   end;
 
   UD_PreV.Position := 0;
-  PW.UD_TPro.Position := UD_PreV.Position;
-  PW.Draw_Data(Sender);
+  Form_PW.UD_TPro.Position := UD_PreV.Position;
+  Form_PW.Draw_Data(Sender);
 end;
 
 procedure TForm_Main.UD_BKNoClick(Sender: TObject; Button: TUDBtnType);
@@ -473,11 +482,11 @@ var
 begin
   kk := UD_BKNo.Position;
   lk  := UD_BKImgNo.Position;
-  for lj:=0 to PW.PH-1 do
-    for li:=0 to PW.PW-1 do
-      PW.PData[lj,li] := BKIData[kk,lk,lj,li];
-  PW.Show;
-  PW.Draw_Data(Sender);
+  for lj:=0 to Form_PW.PH-1 do
+    for li:=0 to Form_PW.PW-1 do
+      Form_PW.PData[lj,li] := BKIData[kk,lk,lj,li];
+  Form_PW.Show;
+  Form_PW.Draw_Data(Sender);
 end;
 
 procedure TForm_Main.BB_Load_ProClick(Sender: TObject);
@@ -485,7 +494,7 @@ var
   i,j,k,kk,kkk:longint;
 begin
   Init_Cond(Sender);
-  PW.Show;
+  Form_PW.Show;
 
   kk := UD_TPro.Position;
   kkk :=(kk div BKInt+1)*BKNum;
@@ -494,14 +503,14 @@ begin
   for k:=0 to SN-1 do
   begin
     UD_PreV.Position :=kk*SN+k+OffsetPro;//*SN{+37*(kkk+1)};//sCMOS利用時？
-    PW.UD_TPro.Position := UD_PreV.Position;
+    Form_PW.UD_TPro.Position := UD_PreV.Position;
     Init_Cond(Sender);
 
-    PW.Load_WORDData(Edit_FN.Text, Sender);
+    Form_PW.Load_WORDData(Edit_FN.Text, Sender);
 
-    for j:=0 to PW.PH-1 do
-      for i:=0 to PW.PW-1 do
-        ProIData[k,j,i] := PW.IData[j,i];
+    for j:=0 to Form_PW.PH-1 do
+      for i:=0 to Form_PW.PW-1 do
+        ProIData[k,j,i] := Form_PW.IData[j,i];
   end;
 end;
 
@@ -511,11 +520,11 @@ var
 begin
   BB_Load_ProClick(Sender);
   k  := UD_ProImg.Position;
-  for j:=0 to PW.PH-1 do
-    for i:=0 to PW.PW-1 do
-      PW.PData[j,i] := ProIData[k,j,i];
-  PW.Show;
-  PW.Draw_Data(Sender);
+  for j:=0 to Form_PW.PH-1 do
+    for i:=0 to Form_PW.PW-1 do
+      Form_PW.PData[j,i] := ProIData[k,j,i];
+  Form_PW.Show;
+  Form_PW.Draw_Data(Sender);
 end;
 
 procedure TForm_Main.UD_ProImgClick(Sender: TObject; Button: TUDBtnType);
@@ -523,11 +532,11 @@ var
   i,j,k:longint;
 begin
   k  := UD_ProImg.Position;
-  for j:=0 to PW.PH-1 do
-    for i:=0 to PW.PW-1 do
-      PW.PData[j,i] := ProIData[k,j,i];
-  PW.Show;
-  PW.Draw_Data(Sender);
+  for j:=0 to Form_PW.PH-1 do
+    for i:=0 to Form_PW.PW-1 do
+      Form_PW.PData[j,i] := ProIData[k,j,i];
+  Form_PW.Show;
+  Form_PW.Draw_Data(Sender);
 end;
 
 
@@ -607,8 +616,8 @@ begin
   R2 := UD_R2.Position;
   RC := (R2-R1)/2;
   //Abs
-  for j:=0 to PW.PH-1 do
-    for i:=0 to PW.PW-1 do
+  for j:=0 to Form_PW.PH-1 do
+    for i:=0 to Form_PW.PW-1 do
     begin
       TmpDbl := 0;
       for k:=R1 to R2 do
@@ -617,8 +626,8 @@ begin
     end;
 
   //Phase
-  for j:=0 to PW.PH-1 do
-    for i:=0 to PW.PW-1 do
+  for j:=0 to Form_PW.PH-1 do
+    for i:=0 to Form_PW.PW-1 do
     begin
       TmpDbl := 0;
       TmpDbl2 := 0;
@@ -634,8 +643,8 @@ begin
   //SAX
 
 //分散、尖度
-  for j:=0 to PW.PH-1 do
-    for i:=0 to PW.PW-1 do
+  for j:=0 to Form_PW.PH-1 do
+    for i:=0 to Form_PW.PW-1 do
     begin
       TmpDbl := 0;
       for k:=R1 to R2 do
@@ -658,16 +667,16 @@ var
   BPFST, BPFEnd : array[1..3] of longint;
   C : array[1..3] of double;
 begin
-  lPW := PW.PW;
-  lPH := PW.PH;
+  lPW := Form_PW.PW;
+  lPH := Form_PW.PH;
 
-  for j:=0 to PW.PH-1 do
-    for i:=0 to PW.PW-1 do
-      PW.PData[j,i] := Data[1,j,i];
-  PW.Gauss_Smooth_Img(PW.PData);
-  for j:=0 to PW.PH-1 do
-    for i:=0 to PW.PW-1 do
-      Data[1,j,i] := PW.PData[j,i];
+  for j:=0 to Form_PW.PH-1 do
+    for i:=0 to Form_PW.PW-1 do
+      Form_PW.PData[j,i] := Data[1,j,i];
+  Form_PW.Gauss_Smooth_Img(Form_PW.PData);
+  for j:=0 to Form_PW.PH-1 do
+    for i:=0 to Form_PW.PW-1 do
+      Data[1,j,i] := Form_PW.PData[j,i];
 
   for j:=0 to lPH-1 do
   begin
@@ -731,26 +740,26 @@ begin
   for kk:=0 to (Pro div BKInt)+1 do
   begin
     for k:=0 to SN-1 do
-      for j:=0 to PW.PH-1 do
-        for i:=0 to PW.PW-1 do
+      for j:=0 to Form_PW.PH-1 do
+        for i:=0 to Form_PW.PW-1 do
           TmpIData[k,j,i] := BKIData[kk,k,j,i];
     Calc(Sender);
 
     for k:=0 to 2 do
-      for j:=0 to PW.PH-1 do
-        for i:=0 to PW.PW-1 do
+      for j:=0 to Form_PW.PH-1 do
+        for i:=0 to Form_PW.PW-1 do
           BKData[kk,k,j,i] := TmpData[k,j,i];
   end;
 
   for k:=0 to SN-1 do
-    for j:=0 to PW.PH-1 do
-      for i:=0 to PW.PW-1 do
+    for j:=0 to Form_PW.PH-1 do
+      for i:=0 to Form_PW.PW-1 do
         TmpIData[k,j,i] := ProIData[k,j,i];
   Calc(Sender);
 
   for k:=0 to 2 do
-    for j:=0 to PW.PH-1 do
-      for i:=0 to PW.PW-1 do
+    for j:=0 to Form_PW.PH-1 do
+      for i:=0 to Form_PW.PW-1 do
         Data[k,j,i] := TmpData[k,j,i];
 
   lX := STrToInt(Edit_lX.Text);
@@ -768,8 +777,8 @@ begin
   rf := (UD_TPro.Position-ri*(BKInt+BKNum))/(BKInt+BKNum);
 
   //ABS -ln
-  for j:=0 to PW.PH-1 do
-    for i:=0 to PW.PW-1 do
+  for j:=0 to Form_PW.PH-1 do
+    for i:=0 to Form_PW.PW-1 do
     begin
       TmpDbl := (1-rf)*Data[0,j,i]/BKData[ri,0,j,i]+rf*Data[0,j,i]/BKData[ri+1,0,j,i];
       if (TmpDbl>0) {and (TmpDbl<5)} then
@@ -779,13 +788,13 @@ begin
     end;
 
   //Phase subtraction
-  for j:=0 to PW.PH-1 do
-    for i:=0 to PW.PW-1 do
+  for j:=0 to Form_PW.PH-1 do
+    for i:=0 to Form_PW.PW-1 do
       Data[1,j,i] := ((1-rf)*(Data[1,j,i]-BKData[ri,1,j,i])+rf*(Data[1,j,i]-BKData[ri+1,1,j,i]));
 
   //SAX subtraction
-  for j:=0 to PW.PH-1 do
-    for i:=0 to PW.PW-1 do
+  for j:=0 to Form_PW.PH-1 do
+    for i:=0 to Form_PW.PW-1 do
       Data[2,j,i] := ((1-rf)*(Data[2,j,i]/BKData[ri,2,j,i])+rf*(Data[2,j,i]/BKData[ri+1,2,j,i]));
 
   if CB_Cor_Base.Checked then
@@ -794,35 +803,35 @@ begin
     begin
       a:=0;
       b:=0;
-      for j:=0 to PW.PH-1 do
+      for j:=0 to Form_PW.PH-1 do
       begin
         for i:=10 to 50 do
           a:=a+Data[1,j,i];
-        for i:=PW.PW-10 downto PW.PW-50 do
+        for i:=Form_PW.PW-10 downto Form_PW.PW-50 do
           b:=b+Data[1,j,i];
       end;
       a:=a/40;
       b:=b/40;
-      for j:=0 to PW.PH-1 do
-        for i:=0 to PW.PW-3 do
-          Data[1,j,i] := Data[1,j,i] +(b-a)*(PW.PW/2-i)/PW.PW/PW.PH-(b+a)/80/PW.PH;
+      for j:=0 to Form_PW.PH-1 do
+        for i:=0 to Form_PW.PW-3 do
+          Data[1,j,i] := Data[1,j,i] +(b-a)*(Form_PW.PW/2-i)/Form_PW.PW/Form_PW.PH-(b+a)/80/Form_PW.PH;
     end
     else
     begin
       a:=0;
       b:=0;
-      for j:=0 to PW.PW-1 do
+      for j:=0 to Form_PW.PW-1 do
       begin
         for i:=10 to 50 do
           a:=a+Data[1,i,j];
-        for i:=PW.PH-10 downto PW.PH-50 do
+        for i:=Form_PW.PH-10 downto Form_PW.PH-50 do
           b:=b+Data[1,i,j];
       end;
       a:=a/40;
       b:=b/40;
-     for j:=0 to PW.PW-1 do
-        for i:=0 to PW.PH-3 do
-          Data[1,j,i] := Data[1,i,j] +(b-a)*(PW.PH/2-i)/PW.PH/PW.PW-(b+a)/80/PW.PW;
+     for j:=0 to Form_PW.PW-1 do
+        for i:=0 to Form_PW.PH-3 do
+          Data[1,j,i] := Data[1,i,j] +(b-a)*(Form_PW.PH/2-i)/Form_PW.PH/Form_PW.PW-(b+a)/80/Form_PW.PW;
     end;
   end;
 
@@ -833,11 +842,11 @@ begin
   end;
 
   kk := CB_DispType.ItemIndex;
-  for j:=0 to PW.PH-1 do
-    for i:=0 to PW.PW-1 do
-      PW.PData[j,i] := Data[kk,j,i];
+  for j:=0 to Form_PW.PH-1 do
+    for i:=0 to Form_PW.PW-1 do
+      Form_PW.PData[j,i] := Data[kk,j,i];
 
-  PW.Draw_Data(Sender);
+  Form_PW.Draw_Data(Sender);
 end;
 
 procedure TForm_Main.CB_DispTypeChange(Sender: TObject);
@@ -845,10 +854,10 @@ var
   i,j,k : longint;
 begin
   k := CB_DispType.ItemIndex;
-  for j:=0 to PW.PH-1 do
-    for i:=0 to PW.PW-1 do
-      PW.PData[j,i] := Data[k,j,i];
-  PW.Draw_Data(Sender);
+  for j:=0 to Form_PW.PH-1 do
+    for i:=0 to Form_PW.PW-1 do
+      Form_PW.PData[j,i] := Data[k,j,i];
+  Form_PW.Draw_Data(Sender);
 end;
 
 procedure TForm_Main.BB_SaveImgClick(Sender: TObject);
@@ -857,20 +866,20 @@ var
 begin
   if SaveDialog1.Execute then
   begin
-    for j:=0 to PW.PH-1 do
-      for i:=0 to PW.PW-1 do
-        PW.PData[j,i] := ProIData[8,j,i];
-    PW.Save_Data(SaveDialog1.FileName+'.abs',Sender);
+    for j:=0 to Form_PW.PH-1 do
+      for i:=0 to Form_PW.PW-1 do
+        Form_PW.PData[j,i] := ProIData[8,j,i];
+    Form_PW.Save_Data(SaveDialog1.FileName+'.abs',Sender);
 
-    for j:=0 to PW.PH-1 do
-      for i:=0 to PW.PW-1 do
-        PW.PData[j,i] := Data[1,j,i];
-    PW.Save_Data(SaveDialog1.FileName+'.ph',Sender);
+    for j:=0 to Form_PW.PH-1 do
+      for i:=0 to Form_PW.PW-1 do
+        Form_PW.PData[j,i] := Data[1,j,i];
+    Form_PW.Save_Data(SaveDialog1.FileName+'.ph',Sender);
 
-    for j:=0 to PW.PH-1 do
-      for i:=0 to PW.PW-1 do
-        PW.PData[j,i] := Data[2,j,i];
-    PW.Save_Data(SaveDialog1.FileName+'.sax',Sender);
+    for j:=0 to Form_PW.PH-1 do
+      for i:=0 to Form_PW.PW-1 do
+        Form_PW.PData[j,i] := Data[2,j,i];
+    Form_PW.Save_Data(SaveDialog1.FileName+'.sax',Sender);
   end;
 end;
 
@@ -920,8 +929,8 @@ begin
 
       if CB_Bin.Checked then
       begin
-        lPW := PW.PW div 2;
-        lPH := PW.PH div 2;
+        lPW := Form_PW.PW div 2;
+        lPH := Form_PW.PH div 2;
         for kkk:=0 to kk do
         begin
           for j:=0 to lPH-1 do
@@ -938,8 +947,8 @@ begin
       end
       else
       begin
-        lPW := PW.PW;
-        lPH := PW.PH;
+        lPW := Form_PW.PW;
+        lPH := Form_PW.PH;
       end;
 
       if CB_Swap.Checked then
@@ -987,12 +996,13 @@ var
   SFN : array[0..2] of string;
 begin
   Init_Cond(Sender);
+  Go :=true;
 
-  PW.Show;
+  Form_PW.Show;
   if CB_Swap.Checked then
-    lPW := PW.OH
+    lPW := Form_PW.OH
   else
-    lPW := PW.OW;
+    lPW := Form_PW.OW;
   if CB_Bin.Checked then
   begin
     lPW := lPW div 2;
@@ -1061,10 +1071,10 @@ begin
 
     for j:= 0 to Pro-1 do
       for i:=0 to lPW-1 do
-        PW.PData[j,i] := SData[j,i];
-    PW.PH := pro;
-    PW.PW := lPW;
-    PW.Draw_Data(Sender);
+        Form_PW.PData[j,i] := SData[j,i];
+    Form_PW.PH := pro;
+    Form_PW.PW := lPW;
+    Form_PW.Draw_Data(Sender);
     SB.SimpleText := 'Slice : '+IntToStr(k);
     Application.ProcessMessages;
 

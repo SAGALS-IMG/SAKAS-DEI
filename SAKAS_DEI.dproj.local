@@ -4,12 +4,12 @@
     <Transaction>2020/05/19 13:43:05.000.460,=C:\Users\Yoneyama\OneDrive\ドキュメント\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>2020/05/19 13:44:00.000.268,=C:\Users\Yoneyama\OneDrive\ドキュメント\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>2021/11/05 16:45:10.000.290,=C:\Users\Yoneyama\OneDrive\ドキュメント\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2021/11/05 16:46:19.000.638,E:\Dropbox\Documents\Program\_20211105_SAKAS_DEI\main.dfm=C:\Users\Yoneyama\OneDrive\ドキュメント\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
-    <Transaction>2021/11/05 16:46:19.000.638,E:\Dropbox\Documents\Program\_20211105_SAKAS_DEI\main.pas=C:\Users\Yoneyama\OneDrive\ドキュメント\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2021/11/05 16:46:25.000.217,E:\Dropbox\Documents\Program\_20211105_SAKAS_DEI\SAKAS_DEI.dproj=C:\Users\Yoneyama\OneDrive\ドキュメント\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
-    <Transaction>2021/11/05 22:42:58.000.848,=E:\Dropbox\Documents\Program\_20211105_SAKAS_DEI\Unit_LP.pas</Transaction>
+    <Transaction>2021/11/05 16:46:19.000.638,C:\Users\Yoneyama\OneDrive\ドキュメント\Embarcadero\Studio\Projects\Unit1.pas=E:\Dropbox\Documents\Program\_20211105_SAKAS_DEI\main.pas</Transaction>
+    <Transaction>2021/11/05 16:46:19.000.638,C:\Users\Yoneyama\OneDrive\ドキュメント\Embarcadero\Studio\Projects\Unit1.dfm=E:\Dropbox\Documents\Program\_20211105_SAKAS_DEI\main.dfm</Transaction>
+    <Transaction>2021/11/05 16:46:25.000.217,C:\Users\Yoneyama\OneDrive\ドキュメント\Embarcadero\Studio\Projects\Project1.dproj=E:\Dropbox\Documents\Program\_20211105_SAKAS_DEI\SAKAS_DEI.dproj</Transaction>
     <Transaction>2021/11/05 22:42:58.000.433,=E:\Dropbox\Documents\Program\_20211105_SAKAS_DEI\Unit_ABOUT.pas</Transaction>
     <Transaction>2021/11/05 22:42:58.000.179,=E:\Dropbox\Documents\Program\_20211105_SAKAS_DEI\SelShape.pas</Transaction>
+    <Transaction>2021/11/05 22:42:58.000.848,=E:\Dropbox\Documents\Program\_20211105_SAKAS_DEI\Unit_LP.pas</Transaction>
     <Transaction>2021/11/05 22:42:59.000.284,=E:\Dropbox\Documents\Program\_20211105_SAKAS_DEI\Unit_PW.pas</Transaction>
     <Transaction>2021/11/05 22:43:00.000.482,=E:\Dropbox\Documents\Program\_20211105_SAKAS_DEI\Unit_SAKAS.pas</Transaction>
     <Transaction>2021/11/05 22:43:01.000.270,=E:\Dropbox\Documents\Program\_20211105_SAKAS_DEI\Unit_Tag.pas</Transaction>
@@ -17,10 +17,10 @@
     <Transaction>2021/11/05 22:45:40.000.504,E:\Dropbox\Documents\Program\_20211105_SAKAS_DEI\Unit_Tag.pas=</Transaction>
     <Transaction>2021/11/05 22:45:50.000.094,E:\Dropbox\Documents\Program\_20211105_SAKAS_DEI\Unit_SAKAS.pas=</Transaction>
     <Transaction>2021/11/05 22:46:39.000.197,=E:\Dropbox\Documents\Program\_20211105_SAKAS_DEI\Unit_SAKAS.pas</Transaction>
-    <Transaction>2021/11/14 19:43:24.423,=C:\Users\akn\Documents\GitHub\SAKAS-COM\SelShape.pas</Transaction>
-    <Transaction>2021/11/14 19:43:24.437,=C:\Users\akn\Documents\GitHub\SAKAS-COM\UFFT.pas</Transaction>
-    <Transaction>2021/11/14 19:43:24.619,=C:\Users\akn\Documents\GitHub\SAKAS-COM\Unit_LP.pas</Transaction>
-    <Transaction>2021/11/14 19:43:25.016,=C:\Users\akn\Documents\GitHub\SAKAS-COM\Unit_PW.pas</Transaction>
-    <Transaction>2021/11/14 19:43:26.039,=C:\Users\akn\Documents\GitHub\SAKAS-COM\Unit_SAKAS.pas</Transaction>
+    <Transaction>2021/11/14 19:43:24.000.619,=C:\Users\akn\Documents\GitHub\SAKAS-COM\Unit_LP.pas</Transaction>
+    <Transaction>2021/11/14 19:43:24.000.437,=C:\Users\akn\Documents\GitHub\SAKAS-COM\UFFT.pas</Transaction>
+    <Transaction>2021/11/14 19:43:24.000.423,=C:\Users\akn\Documents\GitHub\SAKAS-COM\SelShape.pas</Transaction>
+    <Transaction>2021/11/14 19:43:25.000.016,=C:\Users\akn\Documents\GitHub\SAKAS-COM\Unit_PW.pas</Transaction>
+    <Transaction>2021/11/14 19:43:26.000.039,=C:\Users\akn\Documents\GitHub\SAKAS-COM\Unit_SAKAS.pas</Transaction>
   </Transactions>
 </BorlandProject>

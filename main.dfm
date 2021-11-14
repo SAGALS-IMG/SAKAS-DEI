@@ -19,7 +19,7 @@ object Form_Main: TForm_Main
     Left = 0
     Top = 0
     Width = 453
-    Height = 324
+    Height = 193
     Align = alTop
     Caption = 'Tag Files'
     Color = 16771022
@@ -46,6 +46,8 @@ object Form_Main: TForm_Main
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 0
+      ExplicitLeft = 3
+      ExplicitTop = 12
       object SB_Help: TSpeedButton
         Left = 416
         Top = -4
@@ -134,6 +136,7 @@ object Form_Main: TForm_Main
         NumGlyphs = 2
         ParentShowHint = False
         ShowHint = True
+        OnClick = SB_DirClick
       end
       object SB_TagList_Reload: TSpeedButton
         Left = 395
@@ -155,11 +158,12 @@ object Form_Main: TForm_Main
           55557FFFFFFFFF7555550000000000555555777777777755555550FBFB055555
           5555575FFF755555555557000075555555555577775555555555}
         NumGlyphs = 2
+        OnClick = SB_TagList_ReloadClick
       end
       object BB_Proc: TBitBtn
-        Left = 6
-        Top = 59
-        Width = 116
+        Left = 11
+        Top = 56
+        Width = 100
         Height = 25
         Caption = 'Calc dP'
         Font.Charset = DEFAULT_CHARSET
@@ -167,6 +171,20 @@ object Form_Main: TForm_Main
         Font.Height = -13
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
+        Glyph.Data = {
+          76010000424D7601000000000000760000002800000020000000100000000100
+          04000000000000010000130B0000130B00001000000000000000000000000000
+          800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+          33333333333333333333EEEEEEEEEEEEEEE333FFFFFFFFFFFFF3E00000000000
+          00E337777777777777F3E0F77777777770E337F33333333337F3E0F333333333
+          70E337F33333333337F3E0F33333333370E337F333FF3F3337F3E0F330030333
+          70E337F3377F7FF337F3E0F33003003370E337F3377F77FF37F3E0F330030003
+          70E337F3377F777337F3E0F33003003370E337F3377F773337F3E0F330030333
+          70E337F33773733337F3E0F33333333370E337F33333333337F3E0F333333333
+          70E337F33333333337F3E0FFFFFFFFFFF0E337FFFFFFFFFFF7F3E00000000000
+          00E33777777777777733EEEEEEEEEEEEEEE33333333333333333}
+        NumGlyphs = 2
         ParentFont = False
         TabOrder = 0
         OnClick = BB_ProcClick
@@ -192,7 +210,7 @@ object Form_Main: TForm_Main
       end
       object CB_AllCK: TCheckBox
         Left = 303
-        Top = 58
+        Top = 60
         Width = 79
         Height = 17
         Caption = 'Check All'
@@ -233,23 +251,51 @@ object Form_Main: TForm_Main
         TabOrder = 4
         Text = 'Edit_Dir'
       end
+      object BB_STOP_Proc: TBitBtn
+        Left = 117
+        Top = 55
+        Width = 100
+        Height = 25
+        Caption = 'STOP'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        Glyph.Data = {
+          76010000424D7601000000000000760000002800000020000000100000000100
+          04000000000000010000130B0000130B00001000000000000000000000000000
+          800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+          33333333333333333333EEEEEEEEEEEEEEE333FFFFFFFFFFFFF3E00000000000
+          00E337777777777777F3E0F77777777770E337F33333333337F3E0F333333333
+          70E337F33333333337F3E0F33333333370E337F333FFFFF337F3E0F330000033
+          70E337F3377777F337F3E0F33000003370E337F3377777F337F3E0F330000033
+          70E337F3377777F337F3E0F33000003370E337F3377777F337F3E0F330000033
+          70E337F33777773337F3E0F33333333370E337F33333333337F3E0F333333333
+          70E337F33333333337F3E0FFFFFFFFFFF0E337FFFFFFFFFFF7F3E00000000000
+          00E33777777777777733EEEEEEEEEEEEEEE33333333333333333}
+        NumGlyphs = 2
+        ParentFont = False
+        TabOrder = 5
+        OnClick = BB_STOP_ProcClick
+      end
     end
     object Panel3: TPanel
       Left = 2
       Top = 105
       Width = 449
-      Height = 217
+      Height = 86
       Align = alClient
       BevelOuter = bvNone
       Caption = 'Panel3'
       TabOrder = 1
-      ExplicitTop = 77
-      ExplicitHeight = 98
+      ExplicitHeight = 217
       object CLB_File: TCheckListBox
         Left = 0
         Top = 0
         Width = 449
-        Height = 217
+        Height = 86
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -260,8 +306,7 @@ object Form_Main: TForm_Main
         ParentFont = False
         TabOrder = 0
         OnClick = CLB_FileClick
-        ExplicitTop = 176
-        ExplicitHeight = 69
+        ExplicitHeight = 217
       end
     end
   end
@@ -284,7 +329,7 @@ object Form_Main: TForm_Main
   end
   object GroupBox1: TGroupBox
     Left = 0
-    Top = 436
+    Top = 305
     Width = 453
     Height = 250
     Align = alTop
@@ -299,7 +344,7 @@ object Form_Main: TForm_Main
     ParentColor = False
     ParentFont = False
     TabOrder = 2
-    ExplicitTop = 289
+    ExplicitTop = 436
     object Label1: TLabel
       Left = 8
       Top = 22
@@ -560,7 +605,7 @@ object Form_Main: TForm_Main
   end
   object Chart1: TChart
     Left = 0
-    Top = 900
+    Top = 769
     Width = 453
     Height = 136
     BackWall.Brush.Style = bsClear
@@ -631,7 +676,7 @@ object Form_Main: TForm_Main
     BevelInner = bvRaised
     BevelOuter = bvLowered
     TabOrder = 3
-    ExplicitTop = 753
+    ExplicitTop = 900
     DefaultCanvas = 'TGDIPlusCanvas'
     ColorPaletteIndex = 13
     object Series1: TLineSeries
@@ -676,9 +721,9 @@ object Form_Main: TForm_Main
   end
   object Memo: TRichEdit
     Left = 0
-    Top = 1036
+    Top = 905
     Width = 453
-    Height = 18
+    Height = 48
     Align = alClient
     BevelOuter = bvNone
     Font.Charset = SHIFTJIS_CHARSET
@@ -691,11 +736,12 @@ object Form_Main: TForm_Main
     ScrollBars = ssVertical
     TabOrder = 4
     Zoom = 100
-    ExplicitTop = 995
+    ExplicitTop = 929
+    ExplicitHeight = 24
   end
   object GroupBox2: TGroupBox
     Left = 0
-    Top = 324
+    Top = 193
     Width = 453
     Height = 112
     Align = alTop
@@ -710,7 +756,7 @@ object Form_Main: TForm_Main
     ParentColor = False
     ParentFont = False
     TabOrder = 5
-    ExplicitTop = 177
+    ExplicitTop = 324
     object Label17: TLabel
       Left = 105
       Top = 55
@@ -887,7 +933,7 @@ object Form_Main: TForm_Main
   end
   object GroupBox4: TGroupBox
     Left = 0
-    Top = 686
+    Top = 555
     Width = 453
     Height = 214
     Align = alTop
@@ -902,7 +948,7 @@ object Form_Main: TForm_Main
     ParentColor = False
     ParentFont = False
     TabOrder = 6
-    ExplicitTop = 539
+    ExplicitTop = 686
     object Label7: TLabel
       Left = 100
       Top = 23
