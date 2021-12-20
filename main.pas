@@ -1226,12 +1226,13 @@ begin
       Edit_BKFN.Text := Ini.ReadString( 'Proc_1', 'BK1_File_Name', '');
       Edit_BKFN2.Text := Ini.ReadString( 'Proc_1', 'BK2_File_Name', '');
 
-      Edit_Pro.Text := IntToStr(Ini.ReadInteger( 'Method', 'Pro_Num', 100));
-      Edit_SN.Text := Ini.ReadString('Method', 'FS_Number','0');
+//      Edit_Pro.Text := IntToStr(Ini.ReadInteger( 'Method', 'Pro_Num', 100));
+      Edit_SN.Text := Ini.ReadString('Method', 'FS_Num','0');
 
       Edit_BKInt.Text := IntToStr(Ini.ReadInteger( 'Proc_1', 'BK_Interval', 1050));
-      Edit_BKN.Text := IntToStr(Ini.ReadInteger( 'Proc_1', 'BK_Image_Numer', 100));
-      Edit_offsetpro.Text := IntToStr(Ini.ReadInteger( 'Proc_1', 'Off_Image_Numer', 100));
+      Edit_Pro.Text := Edit_BKInt.Text;
+      Edit_BKN.Text := IntToStr(Ini.ReadInteger( 'Proc_1', 'BK_Image_Num', 100));
+      //Edit_offsetpro.Text := IntToStr(Ini.ReadInteger( 'Proc_1', 'Off_Image_Numer', 100));
 
       Edit_OW.Text := IntToStr(Ini.ReadInteger( 'Proc_1', 'Width', 2048));
       Edit_OH.Text := IntToStr(Ini.ReadInteger( 'Proc_1', 'Height', 2048));
@@ -1312,10 +1313,10 @@ begin
 
       if not(Ini.ValueExists( 'Proc_1', 'BK_Interval')) then
         Ini.WriteString( 'Proc_1', 'BK_Interval', Edit_BKInt.Text);
-      if not(Ini.ValueExists('Proc_1', 'BK_Image_Numer')) then
-        Ini.WriteString( 'Proc_1', 'BK_Image_Numer', Edit_BKN.Text );
-      if not(Ini.ValueExists( 'Proc_1', 'Off_Image_Numer')) then
-        Ini.WriteString( 'Proc_1', 'Off_Image_Numer', Edit_offsetpro.Text);
+      if not(Ini.ValueExists('Proc_1', 'BK_Image_Num')) then
+        Ini.WriteString( 'Proc_1', 'BK_Image_Num', Edit_BKN.Text );
+      if not(Ini.ValueExists( 'Proc_1', 'Off_Image_Num')) then
+        Ini.WriteString( 'Proc_1', 'Off_Image_Num', Edit_offsetpro.Text);
 
       if not(Ini.ValueExists('Proc_1', 'Width')) then
         Ini.WriteString( 'Proc_1', 'Width', Edit_PW.Text);
@@ -1335,7 +1336,7 @@ begin
       lFN :=TPath.GetFileNameWithoutExtension(BFN);
       Ini.WriteString( 'Proc_2', 'File_Name', BDir2+lFN+'_s_*');
 
-      Ini.WriteInteger('Proc_2','Image_Numer',StrToInt(Edit_SinoEnd.Text)-StrToInt(Edit_SinoST.Text)+1);
+      Ini.WriteInteger('Proc_2','Image_Num',StrToInt(Edit_SinoEnd.Text)-StrToInt(Edit_SinoST.Text)+1);
 
       if CB_Swap.Checked then
       begin
