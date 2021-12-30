@@ -1334,7 +1334,7 @@ begin
       BFN := Edit_FN.Text;
       BDir2 := ExtractFilePath(BFN)+TPath.GetFileNameWithoutExtension(BFN)+'_cal\sino\';
       lFN :=TPath.GetFileNameWithoutExtension(BFN);
-      Ini.WriteString( 'Proc_2', 'File_Name', BDir2+lFN+'_s_*');
+      Ini.WriteString( 'Proc_2', 'File_Name', BDir2+lFN+'_PH_s_*');
 
       Ini.WriteInteger('Proc_2','Image_Num',StrToInt(Edit_SinoEnd.Text)-StrToInt(Edit_SinoST.Text)+1);
 

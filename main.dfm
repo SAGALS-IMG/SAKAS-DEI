@@ -251,7 +251,7 @@ object Form_Main: TForm_Main
       end
       object BB_STOP_Proc: TBitBtn
         Left = 117
-        Top = 55
+        Top = 56
         Width = 100
         Height = 25
         Caption = 'STOP'
