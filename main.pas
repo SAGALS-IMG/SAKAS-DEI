@@ -1209,6 +1209,7 @@ begin
       BB_Proc_CalcClick(Sender);
       BB_MakeSinoClick(Sender);
       WriteProc2(Sender);
+      CLB_File.Checked[li] := false;
     end;
   end;
 end;
