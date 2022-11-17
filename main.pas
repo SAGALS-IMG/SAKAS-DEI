@@ -10,8 +10,8 @@ uses
   System.StrUtils, System.Types, FFTUnit;
 
 const
-  OPW=2600;
-  OPH=2200;
+  OPW=1300;
+  OPH=1100;
 
 type
   TForm_Main = class(TForm)
@@ -124,6 +124,7 @@ type
     BB_STOP_Proc: TBitBtn;
     Label23: TLabel;
     Edit_ImgNum: TEdit;
+    CB_CCT: TCheckBox;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
 
@@ -172,7 +173,7 @@ var
 var
   Form_Main: TForm_Main;
 
-  BKIData : array[0..2,0..21,0..OPH,0..OPW] of WORD;
+  BKIData : array[0..2,0..21,0..OPH,0..OPW] of LongWORD;
   ProIData, TmpIData : array[0..21,0..OPH,0..OPW] of WORD;
   Data, TmpData : array[0..2,0..OPH,0..OPW] of single;
   BKData : array[0..2,0..2,0..OPH,0..OPW] of single;
@@ -372,7 +373,8 @@ begin
   OffsetPro := StrToInt(Edit_Offsetpro.Text);
 
   //  Pro := StrToInt(Edit_Pro.Text);
-  Pro := StrToInt(Edit_ImgNum.Text) div SN;
+
+  Pro := StrToInt(Edit_ImgNum.Text) div SN-BKNum*2+1;
 
   UD_PreV.Max := (Pro+(Pro div BKInt+1)*BKNum)*SN-1;
   UD_TPro.Max := Pro-1;
@@ -472,7 +474,7 @@ begin
       begin
         for k:=0 to SN-1 do
         begin
-          UD_PreV.Position :=kk*(BKInt+BKNum)*SN+k+OffsetPro+m*SN ;//*SN;{+37*kk}//sCMOS利用時
+          UD_PreV.Position :=kk*(BKInt+1+BKNum)*SN+k+OffsetPro+m*SN ;//*SN;{+37*kk}//sCMOS利用時
           Form_PW.UD_TPro.Position := UD_PreV.Position;
           TmpStr := TmpStr+' '+Form_PW.UD_TPro.Position.ToString;
           Memo.Lines.Text := TmpStr;
@@ -533,21 +535,35 @@ end;
 procedure TForm_Main.BB_Load_ProClick(Sender: TObject);
 var
   i,j,k,kk,kkk:longint;
+  TmpStr : string;
 begin
   Init_Cond(Sender);
   Form_PW.Show;
 
   kk := UD_TPro.Position;
-  kkk :=(kk div BKInt+1)*BKNum;
-  kk := kk+kkk;
+  if not(CB_CCT.Checked) then
+  begin
+    kkk :=(kk div BKInt+1)*BKNum;
+    kk := kk+kkk;
+  end;
   Memo.Lines.Add('Orig pro data loaded @'+UD_TPro.Position.ToString);
+  TmpStr :='';
+
   for k:=0 to SN-1 do
   begin
-    UD_PreV.Position :=kk*SN+k+OffsetPro;//*SN{+37*(kkk+1)};//sCMOS利用時？
+    if CB_CCT.Checked then
+      UD_PreV.Position :=BKNum*SN+kk+k*Pro+OffsetPro
+    else
+      UD_PreV.Position :=kk*SN+k+OffsetPro;//*SN
+
     Form_PW.UD_TPro.Position := UD_PreV.Position;
+
     Init_Cond(Sender);
 
     Form_PW.Load_WORDData(Edit_FN.Text, Sender);
+
+    TmpStr := TmpStr+' '+Form_PW.UD_TPro.Position.ToString;
+    Memo.Lines.Text := TmpStr;
 
     for j:=0 to Form_PW.PH-1 do
       for i:=0 to Form_PW.PW-1 do
@@ -1232,7 +1248,6 @@ begin
       Edit_BKFN.Text := Ini.ReadString( 'Proc_1', 'BK1_File_Name', '');
       Edit_BKFN2.Text := Ini.ReadString( 'Proc_1', 'BK2_File_Name', '');
 
-<<<<<<< HEAD
       Edit_Pro.Text := IntToStr(Ini.ReadInteger( 'Method', 'Pro_Num', 100));
       Edit_SN.Text := Ini.ReadString('Method', 'FS_Num','0');
 
@@ -1240,15 +1255,8 @@ begin
       Edit_BKN.Text := IntToStr(Ini.ReadInteger( 'Proc_1', 'BK_Image_Num', 100));
       Edit_offsetpro.Text := IntToStr(Ini.ReadInteger( 'Proc_1', 'Off_Image_Num', 0));
       Edit_ImgNum.Text  := Ini.ReadString( 'Proc_1', 'Image_Num', '505' );
-=======
-//      Edit_Pro.Text := IntToStr(Ini.ReadInteger( 'Method', 'Pro_Num', 100));
       Edit_SN.Text := Ini.ReadString('Method', 'FS_Num','0');
 
-      Edit_BKInt.Text := IntToStr(Ini.ReadInteger( 'Proc_1', 'BK_Interval', 1050));
-      Edit_Pro.Text := Edit_BKInt.Text;
-      Edit_BKN.Text := IntToStr(Ini.ReadInteger( 'Proc_1', 'BK_Image_Num', 100));
-      //Edit_offsetpro.Text := IntToStr(Ini.ReadInteger( 'Proc_1', 'Off_Image_Numer', 100));
->>>>>>> 589c56f063ed4a751cce3eac7b87a7abefa85317
 
       Edit_OW.Text := IntToStr(Ini.ReadInteger( 'Proc_1', 'Width', 2048));
       Edit_OH.Text := IntToStr(Ini.ReadInteger( 'Proc_1', 'Height', 2048));

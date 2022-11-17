@@ -137,7 +137,7 @@ object Form_Main: TForm_Main
         OnClick = SB_DirClick
       end
       object SB_TagList_Reload: TSpeedButton
-        Left = 395
+        Left = 398
         Top = 2
         Width = 23
         Height = 22
@@ -1291,6 +1291,14 @@ object Form_Main: TForm_Main
       Height = 17
       Caption = '1st Only'
       TabOrder = 26
+    end
+    object CB_CCT: TCheckBox
+      Left = 372
+      Top = 85
+      Width = 97
+      Height = 17
+      Caption = 'Cont CT'
+      TabOrder = 27
     end
   end
   object OpenDialog1: TOpenDialog
