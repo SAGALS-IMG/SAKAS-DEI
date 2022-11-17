@@ -46,8 +46,6 @@ object Form_Main: TForm_Main
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 0
-      ExplicitLeft = 3
-      ExplicitTop = 12
       object SB_Help: TSpeedButton
         Left = 416
         Top = -4
@@ -290,7 +288,6 @@ object Form_Main: TForm_Main
       BevelOuter = bvNone
       Caption = 'Panel3'
       TabOrder = 1
-      ExplicitHeight = 217
       object CLB_File: TCheckListBox
         Left = 0
         Top = 0
@@ -306,7 +303,6 @@ object Form_Main: TForm_Main
         ParentFont = False
         TabOrder = 0
         OnClick = CLB_FileClick
-        ExplicitHeight = 217
       end
     end
   end
@@ -344,7 +340,6 @@ object Form_Main: TForm_Main
     ParentColor = False
     ParentFont = False
     TabOrder = 2
-    ExplicitTop = 436
     object Label1: TLabel
       Left = 8
       Top = 22
@@ -481,6 +476,13 @@ object Form_Main: TForm_Main
       Height = 14
       Caption = 'Background File Name'
     end
+    object Label23: TLabel
+      Left = 350
+      Top = 117
+      Width = 58
+      Height = 14
+      Caption = 'Image No'
+    end
     object Edit_FN: TEdit
       Left = 14
       Top = 41
@@ -602,6 +604,15 @@ object Form_Main: TForm_Main
       Caption = 'Dammy'
       TabOrder = 14
     end
+    object Edit_ImgNum: TEdit
+      Left = 356
+      Top = 135
+      Width = 46
+      Height = 22
+      TabOrder = 15
+      Text = '506'
+      TextHint = '505'
+    end
   end
   object Chart1: TChart
     Left = 0
@@ -676,7 +687,6 @@ object Form_Main: TForm_Main
     BevelInner = bvRaised
     BevelOuter = bvLowered
     TabOrder = 3
-    ExplicitTop = 900
     DefaultCanvas = 'TGDIPlusCanvas'
     ColorPaletteIndex = 13
     object Series1: TLineSeries
@@ -736,8 +746,6 @@ object Form_Main: TForm_Main
     ScrollBars = ssVertical
     TabOrder = 4
     Zoom = 100
-    ExplicitTop = 929
-    ExplicitHeight = 24
   end
   object GroupBox2: TGroupBox
     Left = 0
@@ -756,7 +764,6 @@ object Form_Main: TForm_Main
     ParentColor = False
     ParentFont = False
     TabOrder = 5
-    ExplicitTop = 324
     object Label17: TLabel
       Left = 105
       Top = 55
@@ -948,7 +955,6 @@ object Form_Main: TForm_Main
     ParentColor = False
     ParentFont = False
     TabOrder = 6
-    ExplicitTop = 686
     object Label7: TLabel
       Left = 100
       Top = 23
