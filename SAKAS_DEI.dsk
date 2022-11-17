@@ -35,13 +35,13 @@ Create=1
 Visible=1
 Docked=0
 State=0
-Left=2355
-Top=1512
-Width=3566
+Left=1688
+Top=1505
+Width=6520
 Height=8304
 MaxLeft=-4
 MaxTop=-7
-ClientWidth=3504
+ClientWidth=6457
 ClientHeight=8027
 DockedToMainForm=0
 BorlandEditorCodeExplorer=BorlandEditorCodeExplorer@EditWindow0
@@ -53,7 +53,7 @@ RightPanelSize=0
 BottomPanelSize=0
 BottomMiddlePanelSize=1333
 BottomMiddlePanelClients=DockSite0,ToDo List,MessageView
-BottomMiddelPanelData=0000080001020200000009000000446F636B53697465300E000000546F446F4C69737457696E646F7755180000000000000235050000000000000100000000551800000F0000004D65737361676556696577466F726DFFFFFFFF
+BottomMiddelPanelData=0000080001020200000009000000446F636B53697465300E000000546F446F4C69737457696E646F77D72C0000000000000235050000000000000100000000D72C00000F0000004D65737361676556696577466F726DFFFFFFFF
 
 [View0]
 CustomEditViewType=TEditView
@@ -84,7 +84,7 @@ Left0=496
 Top0=242
 Width0=545
 Height0=1102
-Visible0=1
+Visible0=0
 State0=0
 Module1=E:\Dropbox\Documents\Program\_20150530_AD_DC_ABS_\Unit_PW.pas
 Left1=0
@@ -170,11 +170,11 @@ Docked=1
 State=0
 Left=0
 Top=18
-Width=3504
+Width=6457
 Height=1235
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=3504
+ClientWidth=6457
 ClientHeight=1235
 TBDockHeight=1235
 LRDockWidth=3520
@@ -257,11 +257,6 @@ LRDockWidth=1551
 Dockable=1
 StayOnTop=0
 SplitPos=73
-
-[PropInspDesignerSelection]
-ArrangeBy=Name
-SelectedItem=Name,
-ExpandedItems=Anchors=0,BorderIcons=0,Constraints=0,Font=0,"LiveBinding デザイナ=0",LiveBindings=0,Margins=0,StyleElements=0
 
 [frmDesignPreview]
 PercentageSizes=1
