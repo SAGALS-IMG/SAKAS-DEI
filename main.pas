@@ -1214,6 +1214,7 @@ begin
       BB_Proc_CalcClick(Sender);
       BB_MakeSinoClick(Sender);
       WriteProc2(Sender);
+      CLB_File.Checked[li] := false;
     end;
   end;
 end;
@@ -1231,6 +1232,7 @@ begin
       Edit_BKFN.Text := Ini.ReadString( 'Proc_1', 'BK1_File_Name', '');
       Edit_BKFN2.Text := Ini.ReadString( 'Proc_1', 'BK2_File_Name', '');
 
+<<<<<<< HEAD
       Edit_Pro.Text := IntToStr(Ini.ReadInteger( 'Method', 'Pro_Num', 100));
       Edit_SN.Text := Ini.ReadString('Method', 'FS_Num','0');
 
@@ -1238,6 +1240,15 @@ begin
       Edit_BKN.Text := IntToStr(Ini.ReadInteger( 'Proc_1', 'BK_Image_Num', 100));
       Edit_offsetpro.Text := IntToStr(Ini.ReadInteger( 'Proc_1', 'Off_Image_Num', 0));
       Edit_ImgNum.Text  := Ini.ReadString( 'Proc_1', 'Image_Num', '505' );
+=======
+//      Edit_Pro.Text := IntToStr(Ini.ReadInteger( 'Method', 'Pro_Num', 100));
+      Edit_SN.Text := Ini.ReadString('Method', 'FS_Num','0');
+
+      Edit_BKInt.Text := IntToStr(Ini.ReadInteger( 'Proc_1', 'BK_Interval', 1050));
+      Edit_Pro.Text := Edit_BKInt.Text;
+      Edit_BKN.Text := IntToStr(Ini.ReadInteger( 'Proc_1', 'BK_Image_Num', 100));
+      //Edit_offsetpro.Text := IntToStr(Ini.ReadInteger( 'Proc_1', 'Off_Image_Numer', 100));
+>>>>>>> 589c56f063ed4a751cce3eac7b87a7abefa85317
 
       Edit_OW.Text := IntToStr(Ini.ReadInteger( 'Proc_1', 'Width', 2048));
       Edit_OH.Text := IntToStr(Ini.ReadInteger( 'Proc_1', 'Height', 2048));
@@ -1339,7 +1350,7 @@ begin
       BFN := Edit_FN.Text;
       BDir2 := ExtractFilePath(BFN)+TPath.GetFileNameWithoutExtension(BFN)+'_cal\sino\';
       lFN :=TPath.GetFileNameWithoutExtension(BFN);
-      Ini.WriteString( 'Proc_2', 'File_Name', BDir2+lFN+'_s_*');
+      Ini.WriteString( 'Proc_2', 'File_Name', BDir2+lFN+'_PH_s_*');
 
       Ini.WriteInteger('Proc_2','Image_Num',StrToInt(Edit_SinoEnd.Text)-StrToInt(Edit_SinoST.Text)+1);
 

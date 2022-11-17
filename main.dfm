@@ -251,7 +251,7 @@ object Form_Main: TForm_Main
       end
       object BB_STOP_Proc: TBitBtn
         Left = 117
-        Top = 55
+        Top = 56
         Width = 100
         Height = 25
         Caption = 'STOP'
@@ -393,9 +393,9 @@ object Form_Main: TForm_Main
     object Label4: TLabel
       Left = 144
       Top = 117
-      Width = 63
+      Width = 55
       Height = 14
-      Caption = 'Projection'
+      Caption = 'Img Num'
     end
     object Label11: TLabel
       Left = 214
@@ -443,9 +443,9 @@ object Form_Main: TForm_Main
     object Label19: TLabel
       Left = 78
       Top = 117
-      Width = 63
+      Width = 38
       Height = 14
-      Caption = 'Offset pro'
+      Caption = 'Offset'
     end
     object SB_BKFN2: TSpeedButton
       Left = 418
