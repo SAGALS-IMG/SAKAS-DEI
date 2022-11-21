@@ -106,7 +106,6 @@ type
     Edit_lY: TEdit;
     Edit_lX: TEdit;
     Label21: TLabel;
-    CB_Cont_Mes: TCheckBox;
     BB_Stop: TBitBtn;
     BB_Save_Cond: TBitBtn;
     OpenDialog1: TOpenDialog;
@@ -125,6 +124,9 @@ type
     Label23: TLabel;
     Edit_ImgNum: TEdit;
     CB_CCT: TCheckBox;
+    Label24: TLabel;
+    Edit_Rot_angle: TEdit;
+    CB_Cor_vBK: TCheckBox;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
 
@@ -694,7 +696,7 @@ begin
         TmpDbl2 := TmpDbl2 + (k-RC)*TmpIData[k,j,i];
       end;
       if TmpDbl<>0 then
-        TmpData[1,j,i] := TmpDbl2/TmpDbl;
+        TmpData[1,j,i] := -TmpDbl2/TmpDbl;
     end;
 
   //SAX
@@ -953,6 +955,7 @@ var
   TmpDbl : double;
 begin
   Go := true;
+  Init_Cond(Sender);
   BFN := ChangeFileExt(Edit_FN.Text,'');
 
   if not(TDirectory.Exists(ExtractFilePath( BFN)+ExtractFileName(BFN)+'_cal')) then
@@ -1081,6 +1084,8 @@ begin
   CBK_W := StrToInt(Edit_CBW.Text);
 
   TT := CB_TT.ItemIndex;
+  WriteProc2(Sender);
+
   for k:= StrToInt(Edit_SinoST.Text) to StrToInt(Edit_SinoEnd.Text) do
   begin
     for j:=0 to Pro-1 do
@@ -1125,6 +1130,26 @@ begin
           SData[j,i] := SData[j,i] + (lTmp1-lTmp2)*i/lPW{-(lTmp1+lTmp2)/2};
       end;
     end;
+
+    if CB_Cor_vBK.Checked then
+    begin
+      TmpDbl1 := 0;
+      TmpDbl2 := 0;
+
+      for j:=0 to 4 do
+        for i:=0  to lPW-1 do
+          TmpDbl1 := TmpDbl1 + SData[j,i];
+      for j:=pro-5 to pro-1 do
+        for i:=0  to lPW-1 do
+          TmpDbl2 := TmpDbl2 + SData[j,i];
+
+      for j:=0 to Pro-1 do
+      begin
+        for i:=0 to lPW-1 do
+          SData[j,i] := SData[j,i] + (TmpDbl1-TmpDbl2)*j/pro/5/lPW;
+      end;
+    end;
+
 
     for j:= 0 to Pro-1 do
       for i:=0 to lPW-1 do
@@ -1229,7 +1254,6 @@ begin
       OpenTag(Sender);
       BB_Proc_CalcClick(Sender);
       BB_MakeSinoClick(Sender);
-      WriteProc2(Sender);
       CLB_File.Checked[li] := false;
     end;
   end;
@@ -1250,6 +1274,8 @@ begin
 
       Edit_Pro.Text := IntToStr(Ini.ReadInteger( 'Method', 'Pro_Num', 100));
       Edit_SN.Text := Ini.ReadString('Method', 'FS_Num','0');
+
+      CB_CCT.Checked := not(Ini.ReadBool('Method', 'Step_Mode',true));
 
       Edit_BKInt.Text := IntToStr(Ini.ReadInteger( 'Proc_1', 'BK_Interval', 1050));
       Edit_BKN.Text := IntToStr(Ini.ReadInteger( 'Proc_1', 'BK_Image_Num', 100));
@@ -1285,13 +1311,11 @@ begin
           CB_Cor_Base.Checked := Ini.ReadBool( 'Proc_2', 'Cor_Base',  false);
         if Ini.ValueExists(  'Proc_2', 'Conv_Step') then
           CB_Step.Checked := Ini.ReadBool( 'Proc_2', 'Conv_Step',  false);
-        if Ini.ValueExists(  'Proc_2', 'Cont_Mes') then
-          CB_Cont_Mes.Checked := Ini.ReadBool( 'Proc_2', 'Cont_Mes',  false);
 
-        if Ini.ValueExists(  'Proc_2', 'Calc_Ph_ST') then
-          UD_R1.Position := Ini.ReadInteger( 'Proc_2', 'Calc_Ph_ST', 0);
-        if Ini.ValueExists(  'Proc_2', 'Calc_Ph_End') then
-          UD_R2.Position := Ini.ReadInteger( 'Proc_2', 'Calc_Ph_End', 0);
+        if Ini.ValueExists(  'Proc_2', 'ST') then
+          UD_R1.Position := Ini.ReadInteger( 'Proc_2', 'ST', 0);
+        if Ini.ValueExists(  'Proc_2', 'End') then
+          UD_R2.Position := Ini.ReadInteger( 'Proc_2', 'End', 0);
         if Ini.ValueExists(  'Proc_2', 'Cor_Base_Dir') then
           RG_Dir.ItemIndex := Ini.ReadInteger( 'Proc_2', 'Cor_Base_Dir', 0);
 
@@ -1334,6 +1358,11 @@ begin
 
       if not(Ini.ValueExists('Method', 'Pro_Num')) then
         Ini.WriteString( 'Method', 'Pro_Num', Edit_Pro.Text);
+      if not(Ini.ValueExists( 'Method', 'Pro_angle')) then
+        if Edit_Rot_Angle.Text='360' then
+          Ini.WriteInteger( 'Method', 'Pro_angle', 360)
+        else
+          Ini.WriteInteger( 'Method', 'Pro_angle', 180);
 
       if not(Ini.ValueExists( 'Proc_1', 'BK_Interval')) then
         Ini.WriteString( 'Proc_1', 'BK_Interval', Edit_BKInt.Text);
@@ -1377,17 +1406,17 @@ begin
           Ini.WriteInteger( 'Proc_2', 'Width', StrToInt(Edit_PW.Text))
       end;
 
-      Ini.WriteInteger( 'Proc_2', 'Height', StrToInt(Edit_Pro.Text));
+      Ini.WriteInteger( 'Proc_2', 'Height', StrToInt(Edit_ImgNum.Text) div StrToInt(Edit_SN.Text)-BKNum*2);
       Ini.WriteInteger( 'Proc_2', 'Offset_X', StrToInt(Edit_OffX.Text));
       Ini.WriteInteger( 'Proc_2', 'Offset_Y', StrToInt(Edit_OffY.Text));
 
-      Ini.WriteInteger( 'Proc_2', 'Format', 3);
+      Ini.WriteInteger( 'Proc_2', 'Format', 4);
 
       Ini.WriteBool( 'Proc_2', 'XY_Swap',  CB_Swap.Checked);
       Ini.WriteBool( 'Proc_2', 'BINNING',  CB_Bin.Checked);
 
-      Ini.WriteInteger( 'Proc_2', 'Sino_ST', StrToInt(Edit_SinoST.Text));
-      Ini.WriteInteger( 'Proc_2', 'Sino_End', StrToInt(Edit_SinoEnd.Text));
+      Ini.WriteInteger( 'Proc_2', 'ST', StrToInt(Edit_SinoST.Text));
+      Ini.WriteInteger( 'Proc_2', 'End', StrToInt(Edit_SinoEnd.Text));
 
       Ini.WriteBool( 'Proc_2', 'SAX',  CB_SAX.Checked);
       Ini.WriteInteger( 'Proc_2', 'Calc_Ph_ST', UD_R1.Position);
@@ -1395,7 +1424,6 @@ begin
       Ini.WriteBool( 'Proc_2', 'Cor_Base', CB_Cor_Base.Checked);
       Ini.WriteInteger( 'Proc_2', 'Cor_Base_Dir', RG_Dir.ItemIndex);
       Ini.WriteBool( 'Proc_2', 'Conv_Step', CB_Step.Checked);
-      Ini.WriteBool( 'Proc_2', 'Cont_Mes', CB_Cont_Mes.Checked);
 
       Ini.WriteBool( 'Proc_2', 'Cor_BK',  CB_CBKL.Checked);
       Ini.WriteString( 'Proc_2', 'Cor_BK_L', Edit_CBK_L.Text);

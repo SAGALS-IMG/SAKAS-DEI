@@ -325,9 +325,9 @@ object Form_Main: TForm_Main
   end
   object GroupBox1: TGroupBox
     Left = 0
-    Top = 305
+    Top = 329
     Width = 453
-    Height = 250
+    Height = 287
     Align = alTop
     Caption = 'File Info'
     Color = 15135487
@@ -340,6 +340,7 @@ object Form_Main: TForm_Main
     ParentColor = False
     ParentFont = False
     TabOrder = 2
+    ExplicitTop = 305
     object Label1: TLabel
       Left = 8
       Top = 22
@@ -393,12 +394,12 @@ object Form_Main: TForm_Main
     object Label4: TLabel
       Left = 144
       Top = 117
-      Width = 55
+      Width = 52
       Height = 14
-      Caption = 'Img Num'
+      Caption = 'Pro Num'
     end
     object Label11: TLabel
-      Left = 214
+      Left = 223
       Top = 117
       Width = 47
       Height = 14
@@ -420,7 +421,7 @@ object Form_Main: TForm_Main
     end
     object SB_BKFN: TSpeedButton
       Left = 418
-      Top = 186
+      Top = 218
       Width = 23
       Height = 22
       Flat = True
@@ -449,7 +450,7 @@ object Form_Main: TForm_Main
     end
     object SB_BKFN2: TSpeedButton
       Left = 418
-      Top = 214
+      Top = 246
       Width = 23
       Height = 22
       Flat = True
@@ -471,7 +472,7 @@ object Form_Main: TForm_Main
     end
     object Label21: TLabel
       Left = 8
-      Top = 168
+      Top = 200
       Width = 133
       Height = 14
       Caption = 'Background File Name'
@@ -479,9 +480,22 @@ object Form_Main: TForm_Main
     object Label23: TLabel
       Left = 350
       Top = 117
-      Width = 58
+      Width = 69
       Height = 14
-      Caption = 'Image No'
+      Caption = 'Image Num'
+    end
+    object Label24: TLabel
+      Left = 8
+      Top = 168
+      Width = 61
+      Height = 16
+      Caption = 'Rot. Ang.'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
     end
     object Edit_FN: TEdit
       Left = 14
@@ -548,7 +562,7 @@ object Form_Main: TForm_Main
       Text = '510'
     end
     object Edit_BKN: TEdit
-      Left = 214
+      Left = 223
       Top = 135
       Width = 46
       Height = 22
@@ -574,7 +588,7 @@ object Form_Main: TForm_Main
     end
     object Edit_BKFN: TEdit
       Left = 14
-      Top = 187
+      Top = 219
       Width = 398
       Height = 22
       TabOrder = 11
@@ -590,7 +604,7 @@ object Form_Main: TForm_Main
     end
     object Edit_BKFN2: TEdit
       Left = 14
-      Top = 214
+      Top = 246
       Width = 398
       Height = 22
       TabOrder = 13
@@ -598,7 +612,7 @@ object Form_Main: TForm_Main
     end
     object CB_Dammy: TCheckBox
       Left = 159
-      Top = 165
+      Top = 197
       Width = 66
       Height = 17
       Caption = 'Dammy'
@@ -613,10 +627,24 @@ object Form_Main: TForm_Main
       Text = '506'
       TextHint = '505'
     end
+    object Edit_Rot_angle: TEdit
+      Left = 78
+      Top = 165
+      Width = 46
+      Height = 24
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 16
+      Text = '360'
+    end
   end
   object Chart1: TChart
     Left = 0
-    Top = 769
+    Top = 830
     Width = 453
     Height = 136
     BackWall.Brush.Style = bsClear
@@ -687,6 +715,7 @@ object Form_Main: TForm_Main
     BevelInner = bvRaised
     BevelOuter = bvLowered
     TabOrder = 3
+    ExplicitTop = 769
     DefaultCanvas = 'TGDIPlusCanvas'
     ColorPaletteIndex = 13
     object Series1: TLineSeries
@@ -731,9 +760,9 @@ object Form_Main: TForm_Main
   end
   object Memo: TRichEdit
     Left = 0
-    Top = 905
+    Top = 966
     Width = 453
-    Height = 48
+    Height = 3
     Align = alClient
     BevelOuter = bvNone
     Font.Charset = SHIFTJIS_CHARSET
@@ -746,12 +775,14 @@ object Form_Main: TForm_Main
     ScrollBars = ssVertical
     TabOrder = 4
     Zoom = 100
+    ExplicitTop = 935
+    ExplicitHeight = 18
   end
   object GroupBox2: TGroupBox
     Left = 0
     Top = 193
     Width = 453
-    Height = 112
+    Height = 136
     Align = alTop
     Caption = 'Proc'
     Color = clCream
@@ -764,6 +795,7 @@ object Form_Main: TForm_Main
     ParentColor = False
     ParentFont = False
     TabOrder = 5
+    ExplicitTop = 187
     object Label17: TLabel
       Left = 105
       Top = 55
@@ -788,9 +820,9 @@ object Form_Main: TForm_Main
     object Label22: TLabel
       Left = 249
       Top = 82
-      Width = 13
+      Width = 4
       Height = 14
-      Caption = #65374
+      Caption = ','
     end
     object BB_Proc_Calc: TBitBtn
       Left = 9
@@ -868,11 +900,11 @@ object Form_Main: TForm_Main
         'SAX')
     end
     object CB_CBKL: TCheckBox
-      Left = 105
+      Left = 101
       Top = 83
       Width = 73
       Height = 15
-      Caption = 'Cor. BK'
+      Caption = 'Cor. h BK'
       TabOrder = 7
     end
     object Edit_CBK_L: TEdit
@@ -937,10 +969,18 @@ object Form_Main: TForm_Main
       TabOrder = 13
       Text = '5'
     end
+    object CB_Cor_vBK: TCheckBox
+      Left = 101
+      Top = 103
+      Width = 73
+      Height = 15
+      Caption = 'Cor. v BK'
+      TabOrder = 14
+    end
   end
   object GroupBox4: TGroupBox
     Left = 0
-    Top = 555
+    Top = 616
     Width = 453
     Height = 214
     Align = alTop
@@ -955,6 +995,7 @@ object Form_Main: TForm_Main
     ParentColor = False
     ParentFont = False
     TabOrder = 6
+    ExplicitTop = 555
     object Label7: TLabel
       Left = 100
       Top = 23
@@ -1005,8 +1046,8 @@ object Form_Main: TForm_Main
       Caption = #65374
     end
     object Label20: TLabel
-      Left = 239
-      Top = 23
+      Left = 263
+      Top = 149
       Width = 53
       Height = 14
       Caption = 'Mon Pos'
@@ -1094,8 +1135,8 @@ object Form_Main: TForm_Main
       TabOrder = 5
     end
     object CB_Step: TCheckBox
-      Left = 253
-      Top = 151
+      Left = 239
+      Top = 23
       Width = 97
       Height = 17
       Caption = 'Conv. step'
@@ -1261,28 +1302,20 @@ object Form_Main: TForm_Main
       TabOrder = 22
     end
     object Edit_lY: TEdit
-      Left = 370
-      Top = 20
+      Left = 337
+      Top = 170
       Width = 55
       Height = 22
       TabOrder = 23
       Text = '350'
     end
     object Edit_lX: TEdit
-      Left = 305
-      Top = 20
+      Left = 272
+      Top = 170
       Width = 55
       Height = 22
       TabOrder = 24
       Text = '750'
-    end
-    object CB_Cont_Mes: TCheckBox
-      Left = 253
-      Top = 181
-      Width = 87
-      Height = 17
-      Caption = 'Cont. Mes.'
-      TabOrder = 25
     end
     object CB_1stBK: TCheckBox
       Left = 372
@@ -1290,23 +1323,23 @@ object Form_Main: TForm_Main
       Width = 78
       Height = 17
       Caption = '1st Only'
-      TabOrder = 26
+      TabOrder = 25
     end
     object CB_CCT: TCheckBox
-      Left = 372
-      Top = 85
+      Left = 342
+      Top = 23
       Width = 97
       Height = 17
       Caption = 'Cont CT'
-      TabOrder = 27
+      TabOrder = 26
     end
   end
   object OpenDialog1: TOpenDialog
-    Left = 408
-    Top = 393
+    Left = 280
+    Top = 481
   end
   object SaveDialog1: TSaveDialog
-    Left = 392
-    Top = 425
+    Left = 360
+    Top = 481
   end
 end
