@@ -340,7 +340,6 @@ object Form_Main: TForm_Main
     ParentColor = False
     ParentFont = False
     TabOrder = 2
-    ExplicitTop = 305
     object Label1: TLabel
       Left = 8
       Top = 22
@@ -715,9 +714,17 @@ object Form_Main: TForm_Main
     BevelInner = bvRaised
     BevelOuter = bvLowered
     TabOrder = 3
-    ExplicitTop = 769
     DefaultCanvas = 'TGDIPlusCanvas'
     ColorPaletteIndex = 13
+    object SB_Chart_Copy: TSpeedButton
+      Left = 2
+      Top = 107
+      Width = 42
+      Height = 22
+      Caption = 'Copy'
+      Flat = True
+      OnClick = SB_Chart_CopyClick
+    end
     object Series1: TLineSeries
       HoverElement = [heCurrent]
       Marks.Font.Charset = SHIFTJIS_CHARSET
@@ -775,8 +782,6 @@ object Form_Main: TForm_Main
     ScrollBars = ssVertical
     TabOrder = 4
     Zoom = 100
-    ExplicitTop = 935
-    ExplicitHeight = 18
   end
   object GroupBox2: TGroupBox
     Left = 0
@@ -795,7 +800,6 @@ object Form_Main: TForm_Main
     ParentColor = False
     ParentFont = False
     TabOrder = 5
-    ExplicitTop = 187
     object Label17: TLabel
       Left = 105
       Top = 55
@@ -995,7 +999,6 @@ object Form_Main: TForm_Main
     ParentColor = False
     ParentFont = False
     TabOrder = 6
-    ExplicitTop = 555
     object Label7: TLabel
       Left = 100
       Top = 23

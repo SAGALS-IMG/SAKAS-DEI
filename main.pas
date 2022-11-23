@@ -127,6 +127,7 @@ type
     Label24: TLabel;
     Edit_Rot_angle: TEdit;
     CB_Cor_vBK: TCheckBox;
+    SB_Chart_Copy: TSpeedButton;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
 
@@ -165,6 +166,7 @@ type
     procedure SB_DirClick(Sender: TObject);
     procedure SB_TagList_ReloadClick(Sender: TObject);
     procedure BB_STOP_ProcClick(Sender: TObject);
+    procedure SB_Chart_CopyClick(Sender: TObject);
 var
   private
     { Private êÈåæ }
@@ -314,6 +316,11 @@ begin
     EDit_BKFN.Text := OpenDialog1.FileName;
 end;
 
+procedure TForm_Main.SB_Chart_CopyClick(Sender: TObject);
+begin
+  Chart1.CopyToClipboardBitmap;
+end;
+
 procedure TForm_Main.SB_DirClick(Sender: TObject);
 begin
   if OpenDialog1.Execute then
@@ -406,7 +413,7 @@ end;
 
 procedure TForm_Main.BB_LoadBKClick(Sender: TObject);
 var
-  i,j,k,kk,m:longint;
+  i,j,k,kk,m, lX, lY:longint;
   TmpStr : string;
 begin
   Init_Cond(Sender);
@@ -519,6 +526,15 @@ begin
   UD_PreV.Position := 0;
   Form_PW.UD_TPro.Position := UD_PreV.Position;
   Form_PW.Draw_Data(Sender);
+
+  lX := STrToInt(Edit_lX.Text);
+  lY := STrToInt(Edit_lY.Text);
+  i := UD_BKNo.Position;
+  Series1.Clear;
+  for k:=0 to SN-1 do
+  begin
+    Series1.AddXY(k,BKIData[i,k,lY,lX]);
+  end;
 end;
 
 procedure TForm_Main.UD_BKNoClick(Sender: TObject; Button: TUDBtnType);
