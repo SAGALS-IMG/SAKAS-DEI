@@ -1101,7 +1101,7 @@ object Form_Main: TForm_Main
       OnClick = BB_Load_ProClick
     end
     object BB_Calc_dP: TBitBtn
-      Left = 8
+      Left = 9
       Top = 111
       Width = 85
       Height = 25

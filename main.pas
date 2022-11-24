@@ -718,19 +718,35 @@ begin
   //SAX
 
 //ï™éUÅAêÎìx
+//  for j:=0 to Form_PW.PH-1 do
+//    for i:=0 to Form_PW.PW-1 do
+//    begin
+//      TmpDbl := 0;
+//      for k:=R1 to R2 do
+//        TmpDbl := TmpDbl + TmpIData[k,j,i];
+//      TmpDbl := TmpDbl/(R2-R1+1);
+//
+//      TmpDbl2 := 0;
+//      for k:=R1 to R2 do
+//        TmpDbl2 := TmpDbl2 + (TmpIData[k,j,i]-TmpDbl)*(TmpIData[k,j,i]-TmpDbl);
+//
+//      TmpData[2,j,i] := Sqrt(TmpDbl2)/TmpDbl;
+//    end;
+
   for j:=0 to Form_PW.PH-1 do
     for i:=0 to Form_PW.PW-1 do
     begin
+//      Cen := Round(TmpData[1,j,i]+RC);
       TmpDbl := 0;
-      for k:=R1 to R2 do
-        TmpDbl := TmpDbl + TmpIData[k,j,i];
-      TmpDbl := TmpDbl/(R2-R1+1);
+      for k:=0 to SN-1 do
+        TmpDbl := TmpDbl + Abs(BKIData[0,k,j,i]-TmpIData[k,j,i]);
+//      for k:=0{R1} to Cen-3 do
+//        TmpDbl := TmpDbl + TmpIData[k,j,i];
+//      for k:=Cen+3 to SN-1{R2} do
+//        TmpDbl := TmpDbl + TmpIData[k,j,i];
+//      TmpDbl := TmpDbl/(TmpData[0,j,i]+1);
 
-      TmpDbl2 := 0;
-      for k:=R1 to R2 do
-        TmpDbl2 := TmpDbl2 + (TmpIData[k,j,i]-TmpDbl)*(TmpIData[k,j,i]-TmpDbl);
-
-      TmpData[2,j,i] := Sqrt(TmpDbl2)/TmpDbl;
+      TmpData[2,j,i] := TmpDbl/SN;
     end;
 end;
 
@@ -812,6 +828,8 @@ var
   rf, TMpDbl :double;
   a,b:double;
 begin
+//  Init_Cond(Sender);
+
   for kk:=0 to (Pro div BKInt)+1 do
   begin
     for k:=0 to SN-1 do
@@ -868,9 +886,9 @@ begin
       Data[1,j,i] := ((1-rf)*(Data[1,j,i]-BKData[ri,1,j,i])+rf*(Data[1,j,i]-BKData[ri+1,1,j,i]));
 
   //SAX subtraction
-  for j:=0 to Form_PW.PH-1 do
-    for i:=0 to Form_PW.PW-1 do
-      Data[2,j,i] := ((1-rf)*(Data[2,j,i]/BKData[ri,2,j,i])+rf*(Data[2,j,i]/BKData[ri+1,2,j,i]));
+//  for j:=0 to Form_PW.PH-1 do
+//    for i:=0 to Form_PW.PW-1 do
+//      Data[2,j,i] := ((1-rf)*(Data[2,j,i]/BKData[ri,2,j,i])+rf*(Data[2,j,i]/BKData[ri+1,2,j,i]));
 
   if CB_Cor_Base.Checked then
   begin
